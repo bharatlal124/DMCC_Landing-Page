@@ -94,9 +94,12 @@ if (window.gsap && window.ScrollTrigger && !reduceMotion) {
   // Note: we animate the Bootstrap column AROUND each card, because the cards
   // already have their own hover animation in CSS and the two would clash.
   function cardsOneByOne(selector) {
-    gsap.from(selector, {
-      y: 40, opacity: 0, duration: 0.8, stagger: 0.12,
-      scrollTrigger: { trigger: selector, start: "top 85%" }
+    gsap.utils.toArray(selector).forEach(function (card, index) {
+      gsap.from(card, {
+        y: 40, opacity: 0, duration: 0.8,
+        delay: (index % 3) * 0.1,            // cards in the same row come slightly one after another
+        scrollTrigger: { trigger: card, start: "top 90%" }
+      });
     });
   }
 
@@ -110,5 +113,9 @@ if (window.gsap && window.ScrollTrigger && !reduceMotion) {
   gsap.from(".bar", {
     width: 0, duration: 1.2, stagger: 0.15,
     scrollTrigger: { trigger: ".length", start: "top 85%" }
+  });
+
+   window.addEventListener("load", function () {
+    ScrollTrigger.refresh();
   });
 }

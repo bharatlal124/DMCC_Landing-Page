@@ -12,7 +12,7 @@
   --text: #0f1b33;
   --soft-text: #475270;
 }
-
+main { overflow-x: hidden; overflow-x: clip; }
 /* ---------- 2. Basics ---------- */
 html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
